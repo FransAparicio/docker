@@ -1,0 +1,21 @@
+services:
+  dbmysql-compose:
+    container_name: dbmysql-compose
+    image: mysql:9.7.2
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    ports:
+      - "3333:3306"
+    
+  phpmyadmin-compose:
+    container_name: phpmyadmin-compose
+    image: phpmyadmin
+    depends_on:
+      - dbmysql-compose
+    ports:
+      - 8081:80
+    environment:
+      PMA_HOST: dbmysql-compose
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: 123456
